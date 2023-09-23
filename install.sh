@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#g
 # Check if Go is installed, if not, install it.
 if ! command -v go &> /dev/null; then
     echo "Go is not installed. Installing..."
