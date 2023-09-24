@@ -1,11 +1,11 @@
 #!/bin/bash
-#g
 # Check if Go is installed, if not, install it.
 if ! command -v go &> /dev/null; then
     echo "Go is not installed. Installing..."
     wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
     tar -xvf go1.21.1.linux-amd64.tar.gz
     sudo mv go /usr/local
+    rm go1.21.1.linux-amd64.tar.gz
     if [ -z "$GOPATH" ]; then
     echo "Setting GOPATH..."
     #echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
@@ -28,27 +28,21 @@ check_installed() {
 # Install subfinder
 if ! check_installed "subfinder"; then
     echo "Installing subfinder..."
-    wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.3/subfinder_2.6.3_linux_amd64.zip
-    unzip subfinder_2.6.3_linux_amd64.zip
-    rm subfinder_2.6.3_linux_amd64.zip
+    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
     sudo mv ~/go/bin/subfinder /usr/bin
 fi
 
 # Install httpx
 if ! check_installed "httpx"; then
     echo "Installing httpx..."
-    wget https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip
-    unzip httpx_1.3.5_linux_amd64.zip
-    rm httpx_1.3.5_linux_amd64.zip
+    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
     sudo mv ~/go/bin/httpx /usr/bin
 fi
 
 # Install nuclei
 if ! check_installed "nuclei"; then
     echo "Installing nuclei..."
-    wget https://github.com/projectdiscovery/nuclei/releases/download/v2.9.14/nuclei_2.9.14_linux_amd64.zip
-    unzip nuclei_2.9.14_linux_amd64.zip
-    rm nuclei_2.9.14_linux_amd64.zip
+    go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
     sudo mv  ~/go/bin/nuclei /usr/bin
 fi
 
@@ -83,8 +77,61 @@ if ! check_installed "cors"; then
     sudo mv ~/go/bin/CorsMe ~/go/bin/cors
     sudo mv ~/go/bin/cors /usr/bin
 fi
-
-if  ! check_installed "subfinder" && ! check_installed "httpx" && ! check_installed "nuclei" && ! check_installed "aquatone" && ! check_installed "subzy" && ! check_installed "katana" && ! check_installed "cors"; then
+# Install naabu
+if ! check_installed "naabu"; then
+    echo "Installing naabu..."
+    go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest@latest
+    sudo mv ~/go/bin/naabu /usr/bin
+fi
+# Install notify
+if ! check_installed "notify"; then
+    echo "Installing notify..."
+    go install -v github.com/projectdiscovery/notify/cmd/notify@latest
+    sudo mv ~/go/bin/notify /usr/bin
+fi
+# Install mapcider
+if ! check_installed "mapcidr"; then
+    echo "Installing mapcidr..."
+    go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
+    sudo mv ~/go/bin/mapcidr /usr/bin
+fi
+# Install assetfinder
+if ! check_installed "assetfinder"; then
+    echo "Installing assetfinder..."
+    go install -v github.com/tomnomnom/assetfinder@latest
+    sudo mv ~/go/bin/assetfinder /usr/bin
+fi
+# Install httprobe
+if ! check_installed "httprobe"; then
+    echo "Installing httprobe..."
+    go install -v github.com/tomnomnom/httprobe@latest
+    sudo mv ~/go/bin/httprobe /usr/bin
+fi
+# Install waybackurls
+if ! check_installed "waybackurls"; then
+    echo "Installing waybackurls..."
+    go install -v github.com/tomnomnom/waybackurls@latest
+    sudo mv ~/go/bin/waybackurls /usr/bin
+fi
+# Install anew
+if ! check_installed "anew"; then
+    echo "Installing anew..."
+    go install -v github.com/tomnomnom/anew@latest
+    sudo mv ~/go/bin/anew /usr/bin
+fi
+# Install ffuf
+if ! check_installed "ffuf"; then
+    echo "Installing ffuf..."
+    go install -v github.com/ffuf/ffuf@latest
+    sudo mv ~/go/bin/ffuf /usr/bin
+fi
+# Install gau
+if ! check_installed "gau"; then
+    echo "Installing waybackurls..."
+    go install -v github.com/lc/gau/v2/cmd/gau@latest
+    sudo mv ~/go/bin/waybackurls /usr/bin
+fi
+if  ! check_installed "subfinder" && ! check_installed "httpx" && ! check_installed "nuclei" && ! check_installed "aquatone" && ! check_installed "subzy" && ! check_installed "katana" && ! check_installed "cors" && ! check_installed "gau"  && ! check_installed "ffuf"  && ! check_installed "anew"  && ! check_installed "waybackurls"  && ! check_installed "httprobe"  && ! check_installed "assetfinder"  && ! check_installed "mapcidr" && ! check_installed "notify" && ! check_installed "naabu"; then
     echo "Some tools may not have been installed. Please check the installation manually."
 else 
     echo "All tools have been successfully installed"
