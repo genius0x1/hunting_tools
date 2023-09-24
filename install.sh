@@ -77,12 +77,6 @@ if ! check_installed "cors"; then
     sudo mv ~/go/bin/CorsMe ~/go/bin/cors
     sudo mv ~/go/bin/cors /usr/bin
 fi
-# Install naabu
-if ! check_installed "naabu"; then
-    echo "Installing naabu..."
-    go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest@latest
-    sudo mv ~/go/bin/naabu /usr/bin
-fi
 # Install notify
 if ! check_installed "notify"; then
     echo "Installing notify..."
@@ -111,6 +105,7 @@ fi
 if ! check_installed "waybackurls"; then
     echo "Installing waybackurls..."
     go install -v github.com/tomnomnom/waybackurls@latest
+    
     sudo mv ~/go/bin/waybackurls /usr/bin
 fi
 # Install anew
@@ -127,9 +122,9 @@ if ! check_installed "ffuf"; then
 fi
 # Install gau
 if ! check_installed "gau"; then
-    echo "Installing waybackurls..."
+    echo "Installing gau..."
     go install -v github.com/lc/gau/v2/cmd/gau@latest
-    sudo mv ~/go/bin/waybackurls /usr/bin
+    sudo mv ~/go/bin/gau /usr/bin
 fi
 if  ! check_installed "subfinder" && ! check_installed "httpx" && ! check_installed "nuclei" && ! check_installed "aquatone" && ! check_installed "subzy" && ! check_installed "katana" && ! check_installed "cors" && ! check_installed "gau"  && ! check_installed "ffuf"  && ! check_installed "anew"  && ! check_installed "waybackurls"  && ! check_installed "httprobe"  && ! check_installed "assetfinder"  && ! check_installed "mapcidr" && ! check_installed "notify" && ! check_installed "naabu"; then
     echo "Some tools may not have been installed. Please check the installation manually."
