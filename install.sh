@@ -1,5 +1,6 @@
 #!/bin/bash
 # Check if Go is installed, if not, install it.
+sudo apt update
 if ! command -v go &> /dev/null; then
     echo "Go is not installed. Installing..."
     wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
