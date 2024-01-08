@@ -1,21 +1,11 @@
 #!/bin/bash
 # Check if Go is installed, if not, install it.
 sudo apt update
+apt install unzip
 if ! command -v go &> /dev/null; then
     echo "Go is not installed. Installing..."
-    wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
-    tar -xvf go1.21.1.linux-amd64.tar.gz
-    sudo mv go /usr/local
-    rm go1.21.1.linux-amd64.tar.gz
-    if [ -z "$GOPATH" ]; then
-    echo "Setting GOPATH..."
-    #echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
-    #echo 'export PATH="$PATH:$GOPATH/bin"' >> ~/.bashrc
-    echo  'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
-    source ~/.bashrc
-    fi
-
-
+    sudo snap install go --classic
+    go version 
 fi
 check_installed() {
     local tool_name=$1
@@ -52,8 +42,8 @@ if ! check_installed "aquatone"; then
     echo "Installing aquatone..."
     wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
     unzip aquatone_linux_amd64_1.7.0.zip 
-    rm aquatone_linux_amd64_1.7.0.zip 
-    sudo mv ~/go/bin/aquatone /usr/bin
+    rm -r  LICENSE.txt  README.md  aquatone_linux_amd64_1.7.0.zip 
+    sudo mv aquatone /usr/bin
 
 fi
 
